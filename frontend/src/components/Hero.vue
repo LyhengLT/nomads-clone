@@ -1,7 +1,7 @@
 <template>
   <section class="hero" v-show="!loading">
     <video class="hero-video" autoplay muted loop playsinline>
-      <source src="/videos/nomad-vdo-hd.mp4" type="video/mp4">
+      <source :src="base + '/videos/nomad-vdo-hd.mp4'" type="video/mp4">
     </video>
     <div class="hero-overlay"></div>
 
@@ -11,7 +11,7 @@
         <div class="laurel">
           <span class="laurel-text">{{ hero.laurel.text }}</span>
           <span class="laurel-stars">
-            <img v-for="i in hero.laurel.stars" :key="i" src="/images/star.svg" alt="star">
+            <img v-for="i in hero.laurel.stars" :key="i" :src="base + '/images/star.svg'" alt="star">
           </span>
           <span class="laurel-since">{{ hero.laurel.since }}</span>
           <img class="laurel-img" :src="hero.laurel.img" alt="laurel">
@@ -63,6 +63,8 @@
 import { useFetch } from '../composables/useFetch.js'
 
 defineEmits(['openPopup'])
+
+const base = import.meta.env.BASE_URL.replace(/\/$/, '')
 
 const { data: hero, loading } = useFetch('/api/hero', {
   laurel: { text: '', stars: 0, since: '', img: '' },

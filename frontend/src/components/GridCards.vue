@@ -21,7 +21,7 @@
         <div class="grid-card-top">
           <span class="grid-card-rank">{{ item.rank }}</span>
           <span class="grid-card-wifi">
-            <img src="/images/cities/wifi.svg" alt="wifi" width="18" height="18">
+            <img :src="base + '/images/cities/wifi.svg'" alt="wifi" width="18" height="18">
             <span class="wifi-info">
               <span class="wifi-number">{{ item.wifi }}</span>
               <span class="wifi-mbps">Mbps</span>
@@ -56,7 +56,7 @@
 
       <!-- Ad One -->
       <div v-else-if="item.type === 'ad-one'" class="sidebar-boxs ad-one">
-        <div class="sidebar-img"><img src="/images/cities/safetywing.jpg" alt="ad"></div>
+        <div class="sidebar-img"><img :src="base + '/images/cities/safetywing.jpg'" alt="ad"></div>
         <div class="sidebar-hero-text">
           <h3>Global travel and health for nomads, starting at $2/day</h3>
           <a href="#">Get insured</a>
@@ -66,7 +66,7 @@
 
       <!-- Ad Two -->
       <div v-else-if="item.type === 'ad-two'" class="sidebar-boxs ad-two">
-        <div class="sidebar-img"><img src="/images/cities/residency.jpg" alt="residency ad"></div>
+        <div class="sidebar-img"><img :src="base + '/images/cities/residency.jpg'" alt="residency ad"></div>
         <div class="sidebar-hero-text">
           <h3>Get legal residency in 🇪🇸 Spain or 🇵🇹 Portugal. Passport and more.</h3>
           <a href="#">Get residency</a>
@@ -81,14 +81,14 @@
           <div v-for="m in meetups.meetups" :key="m.label"
                class="meet-up-day meet-up-bottom-border">
             <div class="profile-meetup">
-              <img :src="'/images/profiles/profile-' + m.avatar + '.png'" alt="avatar">
+              <img :src="base + '/images/profiles/profile-' + m.avatar + '.png'" alt="avatar">
               <div class="sechudal-with-lable">{{ m.label }}
                 <span class="meet-up-lable">{{ m.rsvp }} RSVPS</span>
               </div>
             </div>
             <div v-if="m.attendees.length" class="two-profile">
               <img v-for="n in m.attendees" :key="n"
-                   :src="'/images/profiles/profile-' + n + '.png'" :alt="'p' + n">
+                   :src="base + '/images/profiles/profile-' + n + '.png'" :alt="'p' + n">
             </div>
           </div>
         </div>
@@ -100,10 +100,10 @@
         <div class="sidebar-meetup-header meet-up-bottom-border travlering">🛩️ Traveling now (17)</div>
         <div class="img-travler">
           <div v-for="n in meetups.traveling" :key="'t-' + n" class="travler-images">
-            <img :src="'/images/profiles/profile-' + n + '.png'" :alt="'p' + n">
+            <img :src="base + '/images/profiles/profile-' + n + '.png'" :alt="'p' + n">
             <div class="travler-popup-img">
               <p>Hidden for non-members due to privacy</p>
-              <img :src="'/images/profiles/profile-' + n + '.png'" alt="blurred profile">
+              <img :src="base + '/images/profiles/profile-' + n + '.png'" alt="blurred profile">
             </div>
           </div>
         </div>
@@ -114,10 +114,10 @@
         <div class="sidebar-meetup-header meet-up-bottom-border travlering">👋 New members (653/mo)</div>
         <div class="img-travler">
           <div v-for="n in meetups.newMembers" :key="'nm-' + n" class="travler-images">
-            <img :src="'/images/profiles/profile-' + n + '.png'" :alt="'p' + n">
+            <img :src="base + '/images/profiles/profile-' + n + '.png'" :alt="'p' + n">
             <div class="travler-popup-img">
               <p>Hidden for non-members due to privacy</p>
-              <img :src="'/images/profiles/profile-' + n + '.png'" alt="blurred profile">
+              <img :src="base + '/images/profiles/profile-' + n + '.png'" alt="blurred profile">
             </div>
           </div>
         </div>
@@ -137,6 +137,8 @@
 <script setup>
 import { computed } from 'vue'
 import { useFetch } from '../composables/useFetch.js'
+
+const base = import.meta.env.BASE_URL.replace(/\/$/, '')
 
 const { data: cities, loading: citiesLoading } = useFetch('/api/cities', [])
 const { data: meetups, loading: meetupsLoading } = useFetch('/api/meetups', {

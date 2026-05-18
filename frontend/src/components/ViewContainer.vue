@@ -8,7 +8,7 @@
         <path d="m235.6 492.4c0-65.3.2-130.6-.2-196-.1-12.8 5.1-22 15.1-29.1 23.1-16.4 46.1-32.8 69.2-49.2 14.4-10.2 28.7-20.5 43.2-30.7 15.8-11.2 30.8-11.4 46.7-.6 35.5 23.9 71 47.8 106.4 71.9 3.5 2.4 5.8 2.2 9.1-.2 33.3-23.9 66.7-47.6 100.1-71.3 9.9-7 20.6-10.2 32.5-6.9 10.7 2.9 16.6 11 16.6 22.1 0 132.8 0 265.6.1 398.4 0 9.5-3.4 16.9-10.8 22.4-14.6 10.8-29.4 21.3-44.2 31.8-24.1 17.2-48.1 34.6-72.6 51.4-5.9 4-12.9 6.8-19.8 8.8-7.9 2.3-15.3-.3-22.1-4.9-36.7-24.9-73.5-49.5-110.1-74.5-3.7-2.5-6-2.3-9.5.2-33.6 24.1-67.3 48-100.9 71.9-9.9 7-20.7 10.1-32.5 6.8-10.7-3-16.3-11.2-16.3-22.3 0-66.7 0-133.4 0-200zm285.8 165.9c.1-2.4.2-3.7.2-4.9 0-108 0-216 .1-324 0-3-.9-4.9-3.4-6.6-41.6-28-83.2-56-124.7-84-.9-.6-1.9-.8-3.2-1.4v3c0 108.5 0 217-.1 325.5 0 3.4 1.4 5 4 6.7 33.2 22.3 66.3 44.7 99.4 67 8.9 6.1 17.9 12.1 27.7 18.7z" fill-opacity="0" fill="#000"></path>
         <path d="m521.4 658.3c-9.8-6.6-18.8-12.6-27.7-18.7-33.1-22.4-66.3-44.7-99.4-67-2.5-1.7-4-3.3-4-6.7.1-108.5.1-217 .1-325.5 0-.8 0-1.6 0-3 1.3.6 2.4.9 3.2 1.4 41.6 28 83.1 56.1 124.7 84 2.5 1.7 3.4 3.6 3.4 6.6-.1 108-.1 216-.1 324 0 1.3-.1 2.6-.2 4.9z" fill="var(--brand-color)"></path>
       </svg>
-      <img src="/images/arrow.svg" alt="arrow" class="arrow">
+      <img :src="base + '/images/arrow.svg'" alt="arrow" class="arrow">
       <LogoDropdown :isOpen="logoOpen" />
     </div>
 
@@ -55,7 +55,7 @@
         </select>
         <div class="action-select-sort-order">
           <div class="asc" data-order="asc"><span class="tooltip-set"></span></div>
-          <img src="/images/arrow.svg" alt="arrow" class="arrow-1">
+          <img :src="base + '/images/arrow.svg'" alt="arrow" class="arrow-1">
         </div>
       </div>
       <div class="join-nomads" @click="$emit('openPopup')">{{ controls.joinBtn }}</div>
@@ -72,6 +72,8 @@ import { useFetch } from '../composables/useFetch.js'
 
 defineProps(['filterOpen'])
 defineEmits(['toggleFilter', 'openPopup'])
+
+const base = import.meta.env.BASE_URL.replace(/\/$/, '')
 
 const { data: controls, loading } = useFetch('/api/controls', {
   joinBtn: '',
