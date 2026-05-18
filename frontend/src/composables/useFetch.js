@@ -6,7 +6,8 @@ export function useFetch(url, defaultValue) {
 
   onMounted(async () => {
     try {
-      const res = await fetch(url)
+      const base = import.meta.env.BASE_URL.replace(/\/$/, '')
+      const res = await fetch(base + url)
       if (res.ok) data.value = await res.json()
       else console.error(`[useFetch] ${url} → ${res.status}`)
     } catch (err) {
